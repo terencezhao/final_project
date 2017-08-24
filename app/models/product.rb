@@ -14,8 +14,6 @@
 #
 
 class Product < ApplicationRecord
-    has_many :owns, :dependent => :destroy
-    has_many :wants, :dependent => :destroy
     has_many :reviews, :dependent => :destroy
     belongs_to :brand
     belongs_to :category

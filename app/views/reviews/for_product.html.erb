@@ -137,12 +137,12 @@
       <% end %>
       <tr>
         <td>AVERAGES</td>
-        <td><%= @quality_average %></td>
-        <td><%= @value_average %></td>
-        <td><%= @style_average %></td>
-        <td><%= @utility_average %></td>
-        <td><%= @enjoyment_average %></td>
-        <td><%= number_to_percentage(@recommendation_average * 100.0, precision: 0) %></td>
+        <td><%= number_with_precision(@quality_average, precision:2) %></td>
+        <td><%= number_with_precision(@value_average, precision:2) %></td>
+        <td><%= number_with_precision(@style_average, precision:2) %></td>
+        <td><%= number_with_precision(@utility_average, precision:2) %></td>
+        <td><%= number_with_precision(@enjoyment_average, precision:2) %></td>
+        <td><%= number_to_percentage(@recommendation_average * 100.0, precision: 2) %></td>
       </tr>
     </table>
   </div>

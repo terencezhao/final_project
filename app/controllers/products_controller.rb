@@ -6,8 +6,8 @@ class ProductsController < ApplicationController
     @products_sorted_by_brand = @products.sort_by { |product| product.brand.name.downcase }
     @products_sorted_by_category = @products.sort_by { |product| product.category.name.downcase }
     @products_sorted_by_price = @products.sort_by { |product| product.price }
-    @products_sorted_by_review = @products.sort_by { |product| product.reviews.map { |review| (review.quality + review.value + review.style + review.utility + review.enjoyment)/5.0 }.inject(0){|sum,x| sum+x}}.reverse!
-    @products_sorted_by_recommendation = @products.sort_by { |product| product.reviews.select { |review| review.recommend }.size }.reverse!
+    @products_sorted_by_review = @products.sort_by { |product| product.reviews.map { |review| (review.quality + review.value + review.style + review.utility + review.enjoyment)/5.0 }.inject(0){|sum,x| sum+x}/(product.reviews.size > 0 ? product.reviews.size : 1)}.reverse!
+    @products_sorted_by_recommendation = @products.sort_by { |product| product.reviews.select { |review| review.recommend }.size.to_f / product.reviews.size.to_f }.reverse!
 
     render("products/index.html.erb")
   end

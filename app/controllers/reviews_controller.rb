@@ -85,7 +85,7 @@ class ReviewsController < ApplicationController
     save_status = @review.save
 
     if save_status == true
-      redirect_to("/reviews", :notice => "Review updated successfully.")
+      redirect_to("/reviews/for_user/" + current_user.id.to_s, :notice => "Review updated successfully.")
     else
       render("reviews/edit.html.erb")
     end

@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Review #<%= @review.id %></h3>
+  <h3>Edit Review <%= @review.product.name %></h3>
 </div>
 
 <div class="row">
@@ -18,23 +18,11 @@
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
 
-      <!-- Label and input for user_id -->
-      <div class="form-group">
-        <label for="user_id" class="control-label">
-          User
-        </label>
 
-        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @review.user_id %>">
-      </div>
+        <input type="hidden" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @review.user_id %>">
 
-      <!-- Label and input for product_id -->
-      <div class="form-group">
-        <label for="product_id" class="control-label">
-          Product
-        </label>
+        <input type="hidden" id="product_id" name="product_id" placeholder="Product" class="form-control" value="<%= @review.product_id %>">
 
-        <input type="text" id="product_id" name="product_id" placeholder="Product" class="form-control" value="<%= @review.product_id %>">
-      </div>
 
       <!-- Label and input for quality -->
       <div class="form-group">

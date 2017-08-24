@@ -76,7 +76,7 @@
                <% else %>
                  <%= "N/A" %>
              <% end %>
-             <%= " (" + review_average.to_s + "/4.0)" %>
+             <%= " (" + number_with_precision(review_average, precision:2) + "/4.0)" %>
           <% end %>
         </td>
         <td>

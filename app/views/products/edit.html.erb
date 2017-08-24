@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Product #<%= @product.id %></h3>
+  <h3>Edit Product <%= @product.name %></h3>
 </div>
 
 <div class="row">
@@ -23,8 +23,7 @@
         <label for="category_id" class="control-label">
           Category
         </label>
-
-        <input type="text" id="category_id" name="category_id" placeholder="Category" class="form-control" value="<%= @product.category_id %>">
+        <%= select_tag("category_id", options_from_collection_for_select(Category.all, :id, :name, @product.category_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for brand_id -->
@@ -32,8 +31,7 @@
         <label for="brand_id" class="control-label">
           Brand
         </label>
-
-        <input type="text" id="brand_id" name="brand_id" placeholder="Brand" class="form-control" value="<%= @product.brand_id %>">
+        <%= select_tag("brand_id", options_from_collection_for_select(Brand.all, :id, :name, @product.brand_id), :class => "form-control") %>
       </div>
 
       <!-- Label and input for price -->
