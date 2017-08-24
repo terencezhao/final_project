@@ -1,0 +1,86 @@
+<!-- Validation failure messages -->
+<% if @product.errors.any? %>
+  <% @product.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Product</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_product" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for category_id -->
+      <div class="form-group">
+        <label for="category_id" class="control-label">
+          Category
+        </label>
+        <%= select_tag("category_id", options_from_collection_for_select(Category.all, :id, :name, @product.category_id), :class => "form-control") %>
+        <p class="help-block">
+          <a href="/categories/new">or add a new category</a>
+        </p>
+      </div>
+
+      <!-- Label and input for brand_id -->
+      <div class="form-group">
+        <label for="brand_id" class="control-label">
+          Brand
+        </label>
+        <%= select_tag("brand_id", options_from_collection_for_select(Brand.all, :id, :name, @product.brand_id), :class => "form-control") %>
+        <p class="help-block">
+          <a href="/brands/new">or add a new brand</a>
+        </p>
+      </div>
+      
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @product.name %>">
+      </div>
+      
+      <!-- Label and input for details -->
+      <div class="form-group">
+        <label for="details" class="control-label">
+          Details
+        </label>
+
+        <input type="text" id="details" name="details" placeholder="Details" class="form-control" value="<%= @product.details %>">
+      </div>
+
+      <!-- Label and input for price -->
+      <div class="form-group">
+        <label for="price" class="control-label">
+          Price
+        </label>
+
+        <input type="text" id="price" name="price" placeholder="Price" class="form-control" value="<%= @product.price %>">
+      </div>
+
+      <!-- Label and input for image_url -->
+      <div class="form-group">
+        <label for="image_url" class="control-label">
+          Image url
+        </label>
+
+        <input type="text" id="image_url" name="image_url" placeholder="Image url" class="form-control" value="<%= @product.image_url %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Product
+      </button>
+      or
+      <a href="/products">Cancel</a>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,137 @@
+<div class="page-header">
+  <h3><%= @product.brand.name %> <%= @product.name %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Category</dt>
+      <dd><%= @product.category.name %></dd>
+
+      <dt>Brand</dt>
+      <dd><%= @product.brand.name %></dd>
+
+      <dt>Price</dt>
+      <dd><%= number_to_currency(@product.price) %></dd>
+
+      <dt>Image</dt>
+      <dd><a href="<%= @product.image_url %>">Image</a></dd>
+
+      <dt>Details</dt>
+      <dd><%= @product.details %></dd>
+
+      <dt>Name</dt>
+      <dd><%= @product.name %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/products" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/products/<%= @product.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_product/<%= @product.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+  <% unless @product.reviews.any? { |review| review.user_id == current_user.id } %>
+    <button class="btn btn-lg btn-success" data-toggle="collapse" data-target="#new_review">New Review</button>
+  <% end %>
+  <div id="new_review" class="collapse">
+     <form action="/create_review" method="post" class="form-inline">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+      
+      <!--Product ID is specified by default-->
+      <input type="hidden" id="product_id" name="product_id" value="<%= @product.id %>"
+
+      <!-- Label and input for quality -->
+      <div class="form-group">
+         <div class="input-group">
+            <label for="quality" class="control-label">Quality</label>
+            <select class="form-control" id="quality" name="quality">
+              <option value="4">A</option>
+              <option value="3">B</option>
+              <option value="2">C</option>
+              <option value="1">D</option>
+              <option value="0">F</option>
+            </select>
+        </div>
+      </div>
+
+      <!-- Label and input for value -->
+      <div class="form-group">
+        <div class="input-group">
+            <label for="value" class="control-label">Value</label>
+            <select class="form-control" id="value" name="value">
+              <option value="4">A</option>
+              <option value="3">B</option>
+              <option value="2">C</option>
+              <option value="1">D</option>
+              <option value="0">F</option>
+            </select>
+        </div>
+      </div>
+
+      <!-- Label and input for style -->
+      <div class="form-group">
+        <div class="input-group">
+            <label for="style" class="control-label">Style</label>
+            <select class="form-control" id="style" name="style">
+              <option value="4">A</option>
+              <option value="3">B</option>
+              <option value="2">C</option>
+              <option value="1">D</option>
+              <option value="0">F</option>
+            </select>
+        </div>
+      </div>
+
+      <!-- Label and input for utility -->
+      <div class="form-group">
+        <div class="input-group">
+            <label for="utility" class="control-label">Utility</label>
+            <select class="form-control" id="utility" name="utility">
+              <option value="4">A</option>
+              <option value="3">B</option>
+              <option value="2">C</option>
+              <option value="1">D</option>
+              <option value="0">F</option>
+            </select>
+        </div>
+      </div>
+
+      <!-- Label and input for enjoyment -->
+      <div class="form-group">
+        <div class="input-group">  
+            <label for="enjoyment" class="control-label">Enjoyment</label>
+            <select class="form-control" id="enjoyment" name="enjoyment">
+              <option value="4">A</option>
+              <option value="3">B</option>
+              <option value="2">C</option>
+              <option value="1">D</option>
+              <option value="0">F</option>
+            </select>
+        </div>
+      </div>
+
+      <!-- Label and input for recommend -->
+      <div class="checkbox">
+        <label for="recommend">
+          <input type="checkbox" id="recommend" name="recommend" value="1">
+          Recommend
+        </label>
+      </div>
+
+      <button class="btn btn-success">
+        Create Review
+      </button>
+      or
+      <a href="/reviews">Cancel</a>
+    </form>
+  </div>
+</div>

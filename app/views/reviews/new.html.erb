@@ -1,0 +1,117 @@
+<!-- Validation failure messages -->
+<% if @review.errors.any? %>
+  <% @review.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Review</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_review" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <!--<div class="form-group">-->
+      <!--  <label for="user_id" class="control-label">-->
+      <!--    User-->
+      <!--  </label>-->
+
+      <!--  <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @review.user_id %>">-->
+      <!--</div>-->
+
+      <!-- Label and input for product_id -->
+      <div class="form-group">
+        <label for="product_id" class="control-label">
+          Product
+        </label>
+        <%= select_tag("product_id", options_from_collection_for_select(Product.all, :id, :name, @review.product_id), :class => "form-control") %>
+        
+        <p class="help-block">
+          <a href="/products/new">or add a new product</a>
+        </p>
+      </div>
+
+      <!-- Label and input for quality -->
+      <div class="form-group">
+        <label for="quality" class="control-label">Quality</label>
+        <select class="form-control" id="quality" name="quality">
+          <option value="4">A</option>
+          <option value="3">B</option>
+          <option value="2">C</option>
+          <option value="1">D</option>
+          <option value="0">F</option>
+        </select>
+      </div>
+
+      <!-- Label and input for value -->
+      <div class="form-group">
+        <label for="value" class="control-label">Value</label>
+        <select class="form-control" id="value" name="value">
+          <option value="4">A</option>
+          <option value="3">B</option>
+          <option value="2">C</option>
+          <option value="1">D</option>
+          <option value="0">F</option>
+        </select>
+      </div>
+
+      <!-- Label and input for style -->
+      <div class="form-group">
+        <label for="style" class="control-label">Style</label>
+        <select class="form-control" id="style" name="style">
+          <option value="4">A</option>
+          <option value="3">B</option>
+          <option value="2">C</option>
+          <option value="1">D</option>
+          <option value="0">F</option>
+        </select>
+      </div>
+
+      <!-- Label and input for utility -->
+      <div class="form-group">
+        <label for="utility" class="control-label">Utility</label>
+        <select class="form-control" id="utility" name="utility">
+          <option value="4">A</option>
+          <option value="3">B</option>
+          <option value="2">C</option>
+          <option value="1">D</option>
+          <option value="0">F</option>
+        </select>      
+      </div>
+
+      <!-- Label and input for enjoyment -->
+      <div class="form-group">
+        <label for="enjoyment" class="control-label">Enjoyment</label>
+        <select class="form-control" id="enjoyment" name="enjoyment">
+          <option value="4">A</option>
+          <option value="3">B</option>
+          <option value="2">C</option>
+          <option value="1">D</option>
+          <option value="0">F</option>
+        </select>       
+      </div>
+
+      <!-- Label and input for recommend -->
+      <div class="checkbox">
+        <label for="recommend">
+          <input type="checkbox" id="recommend" name="recommend" value="1" <%= "checked" if @review.recommend %>>
+          Would you recommend this product to others?
+        </label>
+      </div>
+
+      <button class="btn btn-success">
+        Create Review
+      </button>
+      or
+      <a href="/reviews">Cancel</a>
+    </form>
+  </div>
+</div>

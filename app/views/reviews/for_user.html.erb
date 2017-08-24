@@ -1,0 +1,45 @@
+<div class="page-header">
+  <h1>
+    Reviews by <%= @user.username %></a>
+  </h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Product</th>
+        <th>Quality</th>
+        <th>Value</th>
+        <th>Style</th>
+        <th>Utility</th>
+        <th>Enjoyment</th>
+        <th>Recommend</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @reviews_for_user.each do |review| %>
+      <tr>
+        <td><a href="/products/<%= review.product.id %>"><%= review.product.name %></a></td>
+        <td><%= review.quality %></td>
+        <td><%= review.value %></td>
+        <td><%= review.style %></td>
+        <td><%= review.utility %></td>
+        <td><%= review.enjoyment %></td>
+        <td>
+            <% if review.recommend %>
+                <i class="fa fa-thumbs-up" style="font-size:36px;color:green"></i>
+            <% else %>
+                <i class="fa fa-thumbs-down" style="font-size:36px;color:red"></i>
+            <% end %>
+        </td>
+        <td>
+          <a href="/reviews/<%= review.id %>" class="btn btn-primary">Show</a>
+          <a href="/reviews/<%= review.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_review/<%= review.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

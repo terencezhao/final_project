@@ -67,6 +67,7 @@ group :test do
   gem 'webmock'
 end
 
+gem "starter_generators", :git => "https://github.com/raghubetina/starter_generators"
 gem 'activeadmin', github: 'activeadmin/activeadmin'
 gem 'devise', github: 'plataformatec/devise'
 gem 'jquery-rails'

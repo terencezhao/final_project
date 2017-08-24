@@ -1,0 +1,37 @@
+<div class="page-header">
+  <h3><%= @brand.name %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dd><img src="<%= @brand.logo %>"></dd>
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/brands" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/brands/<%= @brand.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_brand/<%= @brand.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<h3>Highest rated products from <%= @brand.name %></h3>
+<ul class="list-group">
+<% @products_sorted_by_review.each_with_index do |sorted_product, index| %>
+  <li class="list-group-item">#<%= index+1 %> <%= sorted_product.name %></li>
+<% end %>
+</ul>
+
+<h3>Most recommended products from <%= @brand.name %></h3>
+<ul class="list-group">
+  <% @products_sorted_by_recommendation.each_with_index do |sorted_product, index| %>
+    <li class="list-group-item">#<%= index+1 %> <%= sorted_product.name %></li>
+  <% end %>
+</ul>

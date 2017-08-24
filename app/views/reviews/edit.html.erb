@@ -1,0 +1,99 @@
+<!-- Validation failure messages -->
+<% if @review.errors.any? %>
+  <% @review.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Edit Review #<%= @review.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_review/<%= @review.id %>" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for user_id -->
+      <div class="form-group">
+        <label for="user_id" class="control-label">
+          User
+        </label>
+
+        <input type="text" id="user_id" name="user_id" placeholder="User" class="form-control" value="<%= @review.user_id %>">
+      </div>
+
+      <!-- Label and input for product_id -->
+      <div class="form-group">
+        <label for="product_id" class="control-label">
+          Product
+        </label>
+
+        <input type="text" id="product_id" name="product_id" placeholder="Product" class="form-control" value="<%= @review.product_id %>">
+      </div>
+
+      <!-- Label and input for quality -->
+      <div class="form-group">
+        <label for="quality" class="control-label">
+          Quality
+        </label>
+
+        <input type="text" id="quality" name="quality" placeholder="Quality" class="form-control" value="<%= @review.quality %>">
+      </div>
+
+      <!-- Label and input for value -->
+      <div class="form-group">
+        <label for="value" class="control-label">
+          Value
+        </label>
+
+        <input type="text" id="value" name="value" placeholder="Value" class="form-control" value="<%= @review.value %>">
+      </div>
+
+      <!-- Label and input for style -->
+      <div class="form-group">
+        <label for="style" class="control-label">
+          Style
+        </label>
+
+        <input type="text" id="style" name="style" placeholder="Style" class="form-control" value="<%= @review.style %>">
+      </div>
+
+      <!-- Label and input for utility -->
+      <div class="form-group">
+        <label for="utility" class="control-label">
+          Utility
+        </label>
+
+        <input type="text" id="utility" name="utility" placeholder="Utility" class="form-control" value="<%= @review.utility %>">
+      </div>
+
+      <!-- Label and input for enjoyment -->
+      <div class="form-group">
+        <label for="enjoyment" class="control-label">
+          Enjoyment
+        </label>
+
+        <input type="text" id="enjoyment" name="enjoyment" placeholder="Enjoyment" class="form-control" value="<%= @review.enjoyment %>">
+      </div>
+
+      <!-- Label and input for recommend -->
+      <div class="checkbox">
+        <label for="recommend">
+          <input type="checkbox" id="recommend" name="recommend" value="1" <%= "checked" if @review.recommend %>>
+          Recommend
+        </label>
+      </div>
+
+      <button class="btn btn-warning">
+        Update Review
+      </button>
+      or
+      <a href="/reviews/<%= @review.id %>">Cancel</a>
+    </form>
+  </div>
+</div>
